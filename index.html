@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sawah's Diaries!</title>
+  <meta http-equiv="refresh" content="5;url=home.html">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #5B0000;
+      color: #FFFDD0;
+      padding-top: 150px;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 40px;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px #000;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    a.button {
+      display: inline-block;
+      padding: 12px 25px;
+      background-color: #FFFDD0;
+      color: #5B0000;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 16px;
+      transition: transform 0.3s;
+    }
+
+    a.button:hover {
+      transform: scale(1.1);
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      box-shadow: 0 0 6px 2px white;
+      animation: twinkle 2s infinite alternate;
+      border-radius: 50%;
+    }
+
+    @keyframes twinkle {
+      from {
+        opacity: 0.2;
+        transform: scale(1);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1.5);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>⋆˚࿔ ꜱᴀᴡᴀʜ'ꜱ ᴡᴇʙꜱɪᴛᴇ 𝜗𝜚˚⋆</h1>
+  <p>Welcome to Sawah's Personal Website!</p>
+  <a href="home.html" class="button">Enter Site Now</a>
+
+  <script>
+    for (let i = 0; i < 80; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.animationDuration = (Math.random() * 3 + 1) + 's';
+      document.body.appendChild(star);
+    }
+  </script>
+
+</body>
+</html>

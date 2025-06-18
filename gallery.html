@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sawah's Diaries</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('bgg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-color: transparent;
+      color: #5B0000;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #5B0000;
+      color: #FFFDD0;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    #clock {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 14px;
+      color: #FFFDD0;
+    }
+
+    nav {
+      background-color: #FFFDD0;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #5B0000;
+      font-weight: bold;
+      padding: 5px 10px;
+      display: inline-block;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      background-color: #FFFDD0;
+      color: black;
+    }
+
+    center {
+      margin-top: 10px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 40px;
+      color: #5B0000;
+    }
+
+    .masonry-gallery {
+      column-count: 3;
+      column-gap: 20px;
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: rgba(255,255,255,0.85);
+      border-radius: 10px;
+    }
+
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 20px;
+      overflow: hidden;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .masonry-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    .masonry-item:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    @media (max-width: 768px) {
+      .masonry-gallery {
+        column-count: 2;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .masonry-gallery {
+        column-count: 1;
+      }
+    }
+
+    .filmstrip-container {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      padding: 20px 0;
+      margin: 20px auto;
+      max-width: 1000px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 10px;
+    }
+
+    .filmstrip {
+      display: flex;
+      gap: 20px;
+      padding: 0 50px;
+      overflow-x: auto;
+    }
+
+    .photo-section .filmstrip-item {
+      flex-shrink: 0;
+      width: 300px;
+      height: 200px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: 0.3s;
+    }
+
+    .photo-section .filmstrip-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .video-section .filmstrip-item {
+      flex-shrink: 0;
+      width: 200px;
+      height: 350px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba( 0, 0, 0, 0.1);
+      transition: 0.3;
+    }
+
+    .video-section .filmstrip-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      aspect-ratio: 9 / 16;
+    }
+
+    .video-section {
+      bavkground-colour: rgba(255, 255, 255, 0.85);
+      max-width: 700px;
+    }
+
+    .filmstrip-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+     footer {
+      text-align: center;
+      padding: 3px;
+      background-color: #5B0000;
+      color: white;
+      font-size: 12px;
+      margin-top: 40px;
+    }
+
+    .font-resize-buttons {
+      position: absolute;
+      right: 20px;
+      bottom: 10px;
+    }
+
+    .font-resize-buttons button {
+      background-color: maroon;
+      color: #FFFDD0;
+      border: none;
+      padding: 5px 10px;
+      margin: 0px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 13px;
+      transition: background-color 0.3s ease;
+    }
+
+    .font-resize-buttons button:hover {
+      background-color: #7c1c1c;
+    }
+  </style>
+</head>
+<body>
+
+<header> 
+  <div id="clock"></div>
+  <h1>⋆˚࿔ ꜱᴀᴡᴀʜ'ꜱ ᴡᴇʙꜱɪᴛᴇ 𝜗𝜚˚⋆</h1>
+
+<!-- Search Bar -->
+<div style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+  <input 
+    type="text" 
+    id="searchInput" 
+    placeholder="Search..." 
+    style="padding: 6px 12px; border: 1px solid #FFFDD0; border-radius: 20px; background-color: transparent; color: white; font-size: 14px; width: 160px;"
+  >
+  <button 
+    onclick="searchSite()" 
+    style="margin-left: 8px; padding: 6px 14px; background-color: #FFFDD0; border: 1px solid maroon; color: maroon; border-radius: 20px; font-size: 14px; cursor: pointer;"
+  >
+    Search
+  </button>
+</div>
+
+  <!-- Font Size Buttons -->
+  <div class="font-resize-buttons">
+    <button onclick="changeFontSize(1)">A+</button>
+    <button onclick="changeFontSize(0)">A</button>
+    <button onclick="changeFontSize(-1)">A-</button>
+  </div>
+</header>
+
+<nav>
+  <a href="index.html">HOME</a>
+  <a href="home.html">ABOUT ME</a>
+  <a href="family.html">FAMILY</a>
+  <a href="education.html">EDUCATION</a>
+  <a href="experience.html">EXPERIENCE</a>
+  <a href="gallery.html">GALLERY</a> 
+  <a href="music.html">MUSIC</a>
+  <a href="games.html">GAMES</a>
+</nav>
+
+<center>
+  <audio controls autoplay>
+    <source src="horse.ogg" type="audio/ogg">
+    <source src="blue.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</center>
+
+<!-- Picture Gallery -->
+<h2>📸 My Favorite Pictures 📸</h2>
+<section class="masonry-gallery">
+  <div class="masonry-item"><img src="kroni1.jpg" alt="Image 1" /></div>
+  <div class="masonry-item"><img src="kroni3.jpg" alt="Image 2" /></div>
+  <div class="masonry-item"><img src="kroni2.jpg" alt="Image 3" /></div>
+  <div class="masonry-item"><img src="kroni4.jpg" alt="Image 4" /></div>
+  <div class="masonry-item"><img src="khade.jpg" alt="Image 5" /></div>
+  <div class="masonry-item"><img src="khade2.jpg" alt="Image 6" /></div>
+  <div class="masonry-item"><img src="khade3.jpg" alt="Image 7" /></div>
+  <div class="masonry-item"><img src="fam1.jpg" alt="Image 8" /></div>
+  <div class="masonry-item"><img src="fam2.jpg" alt="Image 9" /></div>
+  <div class="masonry-item"><img src="p1.jpg" alt="Image 10" /></div>
+  <div class="masonry-item"><img src="p2.jpg" alt="Image 11" /></div>
+  <div class="masonry-item"><img src="p3.jpg" alt="Image 12" /></div>
+  <div class="masonry-item"><img src="p4.jpg" alt="Image 13" /></div>
+  <div class="masonry-item"><img src="p5.jpg" alt="Image 14" /></div>
+  <div class="masonry-item"><img src="p6.jpg" alt="Image 15" /></div>
+  <div class="masonry-item"><img src="p7.jpg" alt="Image 16" /></div>
+  <div class="masonry-item"><img src="p8.jpg" alt="Image 17" /></div>
+  <div class="masonry-item"><img src="p9.jpg" alt="Image 18" /></div>
+  <div class="masonry-item"><img src="p10.jpg" alt="Image 19" /></div>
+  <div class="masonry-item"><img src="p11.jpg" alt="Image 20" /></div>
+   <div class="masonry-item"><img src="p12.jpg" alt="Image 21" /></div>
+  <div class="masonry-item"><img src="p13.jpg" alt="Image 22" /></div>
+  <div class="masonry-item"><img src="p14.jpg" alt="Image 23" /></div>
+  <div class="masonry-item"><img src="p15.jpg" alt="Image 24" /></div>
+  <div class="masonry-item"><img src="p16.jpg" alt="Image 25" /></div>
+  <div class="masonry-item"><img src="p17.jpg" alt="Image 26" /></div>
+  <div class="masonry-item"><img src="p18.jpg" alt="Image 27" /></div>
+  <div class="masonry-item"><img src="p19.jpg" alt="Image 28" /></div>
+  <div class="masonry-item"><img src="p20.jpg" alt="Image 29" /></div>
+  <div class="masonry-item"><img src="p21.jpg" alt="Image 30" /></div>
+   <div class="masonry-item"><img src="p22.jpg" alt="Image 31" /></div>
+  <div class="masonry-item"><img src="p23.jpg" alt="Image 32" /></div>
+  <div class="masonry-item"><img src="p24.jpg" alt="Image 33" /></div>
+  <div class="masonry-item"><img src="p25.jpg" alt="Image 34" /></div>
+  <div class="masonry-item"><img src="p26.jpg" alt="Image 35" /></div>
+  <div class="masonry-item"><img src="p27.jpg" alt="Image 36" /></div>
+  <div class="masonry-item"><img src="p28.jpg" alt="Image 37" /></div>
+  <div class="masonry-item"><img src="p29.jpg" alt="Image 38" /></div>
+  <div class="masonry-item"><img src="p30.jpg" alt="Image 39" /></div>
+  <div class="masonry-item"><img src="p31.jpg" alt="Image 40" /></div>
+</section>
+
+<!-- Video Gallery -->
+<h2>🎥 My Favorite Videos 🎥</h2>
+<section class="filmstrip-container video-section">
+  <div class="filmstrip">
+    <div class="filmstrip-item">
+      <video controls>
+        <source src="video1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="filmstrip-item">
+      <video controls>
+        <source src="video2.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="filmstrip-item">
+      <video controls>
+        <source src="video3.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="filmstrip-item">
+      <video controls>
+        <source src="video4.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>📧 Email me at: <a href="mailto:sarahkhadejah@gmail.com" style="color: #FFFDD0;">sarahkhadejah@gmail.com</a></p>
+  <p style="font-size: 10px; margin-top: 5px; color: #ddd;">
+    Created: 1 June 2025 | Last updated: <span id="lastUpdated"></span>
+  </p>
+</footer>
+
+<script>
+  function updateClock() {
+    var now = new Date();
+    var time = now.toLocaleTimeString();
+    var day = now.getDate();
+    var month = now.getMonth() + 1;
+    var year = now.getFullYear();
+    var date = day + '/' + month + '/' + year;
+
+    document.getElementById("clock").innerHTML = date + " | " + time;
+  }
+
+  setInterval(updateClock, 1000);
+  updateClock();
+</script>
+
+<script>
+function searchSite() {
+    const input = document.getElementById("searchInput").value.toLowerCase().trim();
+    const pages = {
+      "about me": "home.html",
+      "family": "family.html",
+      "education": "education.html",
+      "experience": "experience.html",
+      "gallery": "gallery.html",
+      "games": "games.html",
+      "music": "music.html"
+    };
+
+    let found = false;
+    for (const key in pages) {
+      if (input.includes(key)) {
+        location.href = pages[key];
+        found = true;
+        break;
+      }
+    }
+
+    if (!found) alert("No match found.");
+  }
+
+  document.getElementById("searchInput").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      searchSite();
+    }
+  });
+</script>
+
+<script>
+  function changeFontSize(change) {
+  const body = document.body;
+  const style = window.getComputedStyle(body);
+  let currentSize = parseFloat(style.fontSize);
+
+  if (change === 0) {
+    currentSize = 16;
+  } else {
+    currentSize += change;
+    if (currentSize < 12) currentSize = 12;
+    if (currentSize > 24) currentSize = 24;
+  }
+  body.style.fontSize = currentSize + 'px';
+}
+</script>
+
+<script>
+  document.getElementById('lastUpdated').textContent = '10 June 2025';
+</script>
+
+</body>
+</html>

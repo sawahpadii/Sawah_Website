@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sawah's Diaries</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('bgg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-color: transparent;
+      color: #5B0000;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      position: relative;
+      background-color: #5B0000;
+      color: #FFFDD0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    #clock {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 14px;
+      color: #FFFDD0;
+    }
+
+    nav {
+      background-color: #FFFDD0;
+      text-align: center;
+      margin: 0px 0;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #5B0000;
+      font-weight: bold;
+      padding: 5px 10px;
+      display: inline-block;
+      border-radius: 5px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+      transition: box-shadow 0.3s ease, color 0.3s ease;
+    }
+
+    nav a:hover {
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+      background-color: #FFFDD0;
+      color: black;
+    }
+
+    section {
+      flex: 1;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 800px;
+      border-radius: 5px;
+      background-color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+      color: #5B0000;
+    }
+
+    header h1 {
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+      transition: text-shadow 0.3s ease;
+    }
+
+    header h1:hover {
+      text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+    }
+
+     footer {
+      text-align: center;
+      padding: 3px;
+      background-color: #5B0000;
+      color: white;
+      font-size: 12px;
+      margin-top: 40px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #5B0000;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #5B0000;
+      color: #FFFDD0;
+    }
+
+    td {
+      background-color: #FFFDD0;
+      color: #5B0000;
+      cursor: pointer;
+    }
+
+    #placeImage {
+      display: none;
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .slider-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .slider-image {
+      width: 500px;
+      height: 300px;
+      object-fit: cover;
+      border: 3px solid #5B0000;
+      border-radius: 10px;
+      transition: opacity 0.3s ease;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 32px;
+      font-weight: bold;
+      color: #5B0000;
+      cursor: pointer;
+      user-select: none;
+      background-color: rgba(255,255,255,0.5);
+      padding: 6px 12px;
+      border-radius: 50%;
+    }
+
+    .arrow:hover {
+      background-color: #FFFDD0;
+    }
+
+    .left-arrow {
+      left: -40px;
+    }
+
+    .right-arrow {
+      right: -40px;
+    }
+
+    .font-resize-buttons {
+      position: absolute;
+      right: 20px;
+      bottom: 10px;
+    }
+
+    .font-resize-buttons button {
+      background-color: maroon;
+      color: #FFFDD0;
+      border: none;
+      padding: 5px 10px;
+      margin: 0px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 13px;
+      transition: background-color 0.3s ease;
+    }
+
+    .font-resize-buttons button:hover {
+      background-color: #7c1c1c;
+    }
+  </style>
+</head>
+<body>
+
+<header> 
+  <div id="clock"></div>
+  <h1>⋆˚࿔ ꜱᴀᴡᴀʜ'ꜱ ᴡᴇʙꜱɪᴛᴇ 𝜗𝜚˚⋆</h1>
+
+  <!-- Search Bar -->
+  <div style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+    <input 
+      type="text" 
+      id="searchInput" 
+      placeholder="Search..." 
+      style="padding: 6px 12px; border: 1px solid #FFFDD0; border-radius: 20px; background-color: transparent; color: white; font-size: 14px; width: 160px;"
+    >
+    <button 
+      onclick="searchSite()" 
+      style="margin-left: 8px; padding: 6px 14px; background-color: #FFFDD0; border: 1px solid maroon; color: maroon; border-radius: 20px; font-size: 14px; cursor: pointer;"
+    >
+      Search
+    </button>
+  </div>
+
+  <!-- Font Size Buttons -->
+  <div class="font-resize-buttons">
+    <button onclick="changeFontSize(1)">A+</button>
+    <button onclick="changeFontSize(0)">A</button>
+    <button onclick="changeFontSize(-1)">A-</button>
+  </div>
+</header>
+
+<nav>
+  <a href="index.html">HOME</a>
+  <a href="home.html">ABOUT ME</a>
+  <a href="family.html">FAMILY</a>
+  <a href="education.html">EDUCATION</a>
+  <a href="experience.html">EXPERIENCE</a>
+  <a href="gallery.html">GALLERY</a> 
+  <a href="music.html">MUSIC</a>
+  <a href="games.html">GAMES</a>
+</nav>
+
+<section>
+  <h1>INTERNSHIP & EVENTS</h1>
+  <p>Here’s where I gained real-world experience 💼</p>
+  <p><small><strong>Hint: Click the places to see my memories of each place</strong></small></p>
+
+  <table>
+    <tr>
+      <th>Year</th>
+      <th>Place</th>
+      <th>Position</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td>2025</td>
+      <td onclick="showImage('hrpz')">Hospital Raja Perempuan Zainab II (HRPZ II)</td>
+      <td>Intern</td>
+      <td>Completed a two-month internship in the <b>Medical Records Department</b>, where I learned to manage medical records and support administrative tasks.</td>
+    </tr>
+    <tr>
+      <td>2024</td>
+      <td onclick="showImage('colouronus')">Colour On Us (UiTM Machang)</td>
+      <td>Multimedia Unit</td>
+      <td>Handled a university event under the <b>HSK221</b> curriculum and managed visuals and media.</td>
+    </tr>
+  </table>
+
+  <div id="placeImage">
+    <h3>Memories</h3>
+    <div class="slider-container">
+      <span class="arrow left-arrow" onclick="changeSlide(-1)">&#10094;</span>
+      <img id="locationPic" src="" alt="Event or Internship Place" class="slider-image">
+      <span class="arrow right-arrow" onclick="changeSlide(1)">&#10095;</span>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>📧 Email me at: <a href="mailto:sarahkhadejah@gmail.com" style="color: #FFFDD0;">sarahkhadejah@gmail.com</a></p>
+  <p style="font-size: 10px; margin-top: 5px; color: #ddd;">
+    Created: 1 June 2025 | Last updated: <span id="lastUpdated"></span>
+  </p>
+</footer>
+
+<script>
+  function updateClock() {
+    var now = new Date();
+    var time = now.toLocaleTimeString();
+    var day = now.getDate();
+    var month = now.getMonth() + 1;
+    var year = now.getFullYear();
+    var date = day + '/' + month + '/' + year;
+    document.getElementById("clock").innerHTML = date + " | " + time;
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
+</script>
+
+<script>
+  function searchSite() {
+    const input = document.getElementById("searchInput").value.toLowerCase().trim();
+    const pages = {
+      "about me": "home.html",
+      "family": "family.html",
+      "education": "education.html",
+      "experience": "experience.html",
+      "gallery": "gallery.html",
+      "games": "games.html",
+      "music": "music.html"
+    };
+
+    let found = false;
+    for (const key in pages) {
+      if (input.includes(key)) {
+        location.href = pages[key];
+        found = true;
+        break;
+      }
+    }
+
+    if (!found) alert("No match found.");
+  }
+
+  document.getElementById("searchInput").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      searchSite();
+    }
+  });
+
+</script>
+
+<script>
+  var slides = {
+    hrpz: ["hrpz.jpg", "hrpz2.jpg", "hrpz3.jpg"],
+    colouronus: ["cou.jpg", "cou2.jpg", "cou3.jpg"]
+  };
+  var currentSlide = 0;
+  var currentPlace = "";
+
+  function showImage(place) {
+    currentPlace = place;
+    currentSlide = 0;
+    updateImage();
+    document.getElementById("placeImage").style.display = "block";
+  }
+
+  function changeSlide(n) {
+    currentSlide += n;
+    var maxIndex = slides[currentPlace].length;
+    if (currentSlide < 0) currentSlide = maxIndex - 1;
+    if (currentSlide >= maxIndex) currentSlide = 0;
+    updateImage();
+  }
+
+  function updateImage() {
+    var img = document.getElementById("locationPic");
+    img.src = slides[currentPlace][currentSlide];
+    img.alt = currentPlace + " image " + (currentSlide + 1);
+  }
+</script>
+
+<script>
+  function showAlert() {
+    alert("Click the places to see the memories of my experience!");
+  }
+</script>
+
+<script>
+  function changeFontSize(change) {
+    const body = document.body;
+    const style = window.getComputedStyle(body);
+    let currentSize = parseFloat(style.fontSize);
+    if (change === 0) {
+      currentSize = 16;
+    } else {
+      currentSize += change;
+      if (currentSize < 12) currentSize = 12;
+      if (currentSize > 24) currentSize = 24;
+    }
+    body.style.fontSize = currentSize + 'px';
+  }
+</script>
+
+<script>
+  document.getElementById('lastUpdated').textContent = '10 June 2025';
+</script>
+
+</body>
+</html>

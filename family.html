@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sawah's Diaries</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('bgg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-color: transparent;
+      color: #5B0000;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      position: relative;
+      background-color: #5B0000;
+      color: #FFFDD0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    #clock {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 14px;
+      color: #FFFDD0;
+    }
+
+    nav {
+      background-color: #FFFDD0;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #5B0000;
+      font-weight: bold;
+      padding: 5px 10px;
+      display: inline-block;
+      border-radius: 5px;
+      transition: 0.3s ease;
+    }
+
+    nav a:hover {
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+      background-color: #FFFDD0;
+      color: black;
+    }
+
+    section {
+      flex: 1;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 900px;
+      border-radius: 5px;
+      background-color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 3px;
+      background-color: #5B0000;
+      color: white;
+      font-size: 12px;
+      margin-top: 40px;
+    }
+
+    .photo-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .card {
+      perspective: 1000px;
+    }
+
+    .card-inner {
+      width: 160px;
+      height: 160px;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .card:hover .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front,
+    .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 12px;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .card-front img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .card-back {
+      background-color: #FFFDD0;
+      color: #5B0000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      transform: rotateY(180deg);
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .font-resize-buttons {
+      position: absolute;
+      right: 20px;
+      bottom: 10px;
+    }
+
+    .font-resize-buttons button {
+      background-color: maroon;
+      color: #FFFDD0;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .font-resize-buttons button:hover {
+      background-color: #7c1c1c;
+    }
+  </style>
+</head>
+<body>
+
+<header> 
+  <div id="clock"></div>
+  <h1>⋆˚࿔ ꜱᴀᴡᴀʜ'ꜱ ᴡᴇʙꜱɪᴛᴇ 𝜗𝜚˚⋆</h1>
+
+  <!-- Search Bar -->
+  <div style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+    <input 
+      type="text" 
+      id="searchInput" 
+      placeholder="Search..." 
+      style="padding: 6px 12px; border: 1px solid #FFFDD0; border-radius: 20px; background-color: transparent; color: white; font-size: 14px; width: 160px;"
+    >
+    <button 
+      onclick="searchSite()" 
+      style="margin-left: 8px; padding: 6px 14px; background-color: #FFFDD0; border: 1px solid maroon; color: maroon; border-radius: 20px; font-size: 14px; cursor: pointer;"
+    >
+      Search
+    </button>
+  </div>
+
+  <!-- Font Size Buttons -->
+  <div class="font-resize-buttons">
+    <button onclick="changeFontSize(1)">A+</button>
+    <button onclick="changeFontSize(0)">A</button>
+    <button onclick="changeFontSize(-1)">A-</button>
+  </div>
+</header>
+
+<nav>
+  <a href="index.html">HOME</a>
+  <a href="home.html">ABOUT ME</a>
+  <a href="family.html">FAMILY</a>
+  <a href="education.html">EDUCATION</a>
+  <a href="experience.html">EXPERIENCE</a>
+  <a href="gallery.html">GALLERY</a> 
+  <a href="music.html">MUSIC</a>
+  <a href="games.html">GAMES</a>
+</nav>
+
+<section>
+  <h1>MY FAMILY</h1>
+  <p>Meet my beloved family members💖</p>
+  <p><small><strong>Hint: Hover on the cards to see names</strong></small></p>
+
+  <button onclick="toggleFamilyPhoto()" style="background-color: maroon; color: white; padding: 10px 20px; border-radius: 8px;">Family Photo</button>
+  <div id="familyPhoto" style="display:none; margin-top: 20px;">
+    <img src="family.jpg" alt="Family Photo" style="max-width:100%; border-radius:10px;">
+  </div>
+
+  <div class="photo-grid">
+    <div class="card"><div class="card-inner">
+      <div class="card-front"><img src="father.jpg" alt="Father"></div>
+      <div class="card-back">Father: Nik Zailan bin Nik Muhamad (64)</div>
+    </div></div>
+
+    <div class="card"><div class="card-inner">
+      <div class="card-front"><img src="mother.jpg" alt="Mother"></div>
+      <div class="card-back">Mother: Nor Azila binti Hassan (55)</div>
+    </div></div>
+
+    <div class="card"><div class="card-inner">
+      <div class="card-front"><img src="khalis.jpg" alt="Khalis"></div>
+      <div class="card-back">First Brother: Nik Muhammad Khalis (36)</div>
+    </div></div>
+
+    <div class="card"><div class="card-inner">
+      <div class="card-front"><img src="qawim.jpg" alt="Qawim"></div>
+      <div class="card-back">Second Brother: Nik Muhammad Qawim (34)</div>
+    </div></div>
+
+    <div class="card"><div class="card-inner">
+      <div class="card-front"><img src="syahmi.jpg" alt="Syahmi"></div>
+      <div class="card-back">Third Brother: Nik Ahmad Syahmi (33)</div>
+    </div></div>
+
+    <div class="card"><div class="card-inner">
+      <div class="card-front"><img src="aisyah.jpg" alt="Aisyah"></div>
+      <div class="card-back">Sister: Nik Aisyah Humairah (28)</div>
+    </div></div>
+
+    <div class="card"><div class="card-inner">
+      <div class="card-front"><img src="sarah.jpg" alt="Sarah"></div>
+      <div class="card-back">Youngest: Nik Sarah Khadejah (21)</div>
+    </div></div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>📧 Email me at: <a href="mailto:sarahkhadejah@gmail.com" style="color: #FFFDD0;">sarahkhadejah@gmail.com</a></p>
+  <p style="font-size: 10px; margin-top: 5px; color: #ddd;">
+    Created: 1 June 2025 | Last updated: <span id="lastUpdated"></span>
+  </p>
+</footer>
+
+<script>
+  function updateClock() {
+    var now = new Date();
+    var time = now.toLocaleTimeString();
+    var day = now.getDate();
+    var month = now.getMonth() + 1; 
+    var year = now.getFullYear();
+    var date = day + '/' + month + '/' + year;
+    document.getElementById("clock").innerHTML = date + " | " + time;
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
+</script>
+
+<script>
+  function searchSite() {
+    const input = document.getElementById("searchInput").value.toLowerCase().trim();
+    const pages = {
+      "about me": "home.html",
+      "family": "family.html",
+      "education": "education.html",
+      "experience": "experience.html",
+      "gallery": "gallery.html",
+      "games": "games.html",
+      "music": "music.html"
+    };
+
+    let found = false;
+    for (const key in pages) {
+      if (input.includes(key)) {
+        location.href = pages[key];
+        found = true;
+        break;
+      }
+    }
+
+    if (!found) alert("No match found.");
+  }
+
+  document.getElementById("searchInput").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      searchSite();
+    }
+  });
+</script>
+
+<script>
+  function toggleFamilyPhoto() {
+    var photoDiv = document.getElementById("familyPhoto");
+    photoDiv.style.display = (photoDiv.style.display === "none") ? "block" : "none";
+  }
+</script>
+
+<script>
+  function showAlert() {
+    alert("Hover on the cards to see names of the family!");
+  }
+</script>
+
+<script>
+  function changeFontSize(change) {
+    const body = document.body;
+    const style = window.getComputedStyle(body);
+    let currentSize = parseFloat(style.fontSize);
+
+    if (change === 0) {
+      currentSize = 16;
+    } else {
+      currentSize += change;
+      if (currentSize < 12) currentSize = 12;
+      if (currentSize > 24) currentSize = 24;
+    }
+    body.style.fontSize = currentSize + 'px';
+  }
+</script>
+
+<script>
+  document.getElementById('lastUpdated').textContent = '10 June 2025';
+</script>
+
+</body>
+</html>

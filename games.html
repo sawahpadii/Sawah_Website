@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sawah's Diaries</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;  
+      background-image: url('bgg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-color: transparent;
+      color: #5B0000;
+    }
+
+    header {
+      position: relative;
+      background-color: #5B0000;
+      color: #FFFDD0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    #clock {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 14px;
+      color: #FFFDD0;
+    }
+
+    nav {
+      background-color: #FFFDD0;
+      text-align: center;
+      margin: 0px 0;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #5B0000;
+      font-weight: bold;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+      transition: box-shadow 0.3s ease, color 0.3s ease;
+      padding: 5px 10px;
+      display: inline-block;
+      border-radius: 5px;
+    }
+
+    nav a:hover {
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+      background-color: #FFFDD0;
+      color: black;
+    }
+
+    section {
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 800px;
+      border-radius: 5px;
+      background-color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 3px;
+      background-color: #5B0000;
+      color: white;
+      font-size: 12px;
+      margin-top: 40px;
+    }
+
+    header h1 {
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+      transition: text-shadow 0.3s ease;
+    }
+
+    header h1:hover {
+      text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .memory-game {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 600px;
+      margin: 0 auto;
+      gap: 10px;
+    }
+
+    .card {
+      background-color: #5B0000;
+      width: 100px;
+      height: 100px;
+      color: white;
+      font-size: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 8px;
+      user-select: none;
+    }
+
+    .card.flipped {
+      background-color: #FFFDD0;
+      color: #5B0000;
+      cursor: default;
+    }
+
+    .card.matched {
+      background-color: lightgreen;
+      cursor: default;
+    }
+
+    #congratsMessage {
+      display: none;
+      font-size: 24px;
+      color: green;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .font-resize-buttons {
+      position: absolute;
+      right: 20px;
+      bottom: 10px;
+    }
+
+    .font-resize-buttons button {
+      background-color: maroon;
+      color: #FFFDD0;
+      border: none;
+      padding: 5px 10px;
+      margin: 0px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 13px;
+      transition: background-color 0.3s ease;
+    }
+
+    .font-resize-buttons button:hover {
+      background-color: #7c1c1c;
+    }
+  </style>
+</head>
+<body>
+
+<header> 
+  <div id="clock"></div>
+  <h1>⋆˚࿔ ꜱᴀᴡᴀʜ'ꜱ ᴡᴇʙꜱɪᴛᴇ 𝜗𝜚˚⋆</h1>
+
+  <!-- Search Bar -->
+<div style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+  <input 
+    type="text" 
+    id="searchInput" 
+    placeholder="Search..." 
+    style="padding: 6px 12px; border: 1px solid #FFFDD0; border-radius: 20px; background-color: transparent; color: white; font-size: 14px; width: 160px;"
+  >
+  <button 
+    onclick="searchSite()" 
+    style="margin-left: 8px; padding: 6px 14px; background-color: #FFFDD0; border: 1px solid maroon; color: maroon; border-radius: 20px; font-size: 14px; cursor: pointer;"
+  >
+    Search
+  </button>
+</div>
+  
+  <!-- Font Size Buttons -->
+  <div class="font-resize-buttons">
+    <button onclick="changeFontSize(1)">A+</button>
+    <button onclick="changeFontSize(0)">A</button>
+    <button onclick="changeFontSize(-1)">A-</button>
+  </div>
+</header>
+
+<nav>
+  <a href="index.html">HOME</a>
+  <a href="home.html">ABOUT ME</a>
+  <a href="family.html">FAMILY</a>
+  <a href="education.html">EDUCATION</a>
+  <a href="experience.html">EXPERIENCE</a>
+  <a href="gallery.html">GALLERY</a> 
+  <a href="music.html">MUSIC</a>
+  <a href="games.html">GAMES</a>
+</nav>
+
+<section>
+  <h2>🎮 Memory Game 🎮</h2>
+  <p>Remember your past mistakes? Let's hope your memory is better this time. Oops!</p>
+  <div class="memory-game" id="gameBoard"></div>
+
+  <h3>🌐 Try Other Fun Games Online:</h3>
+  <ul style="list-style: none; padding-left: 0;">
+    <li><a href="https://www.coolmathgames.com/0-memory" target="_blank">Memory Game at Cool Math Games</a></li>
+    <li><a href="https://www.crazygames.com/t/memory" target="_blank">CrazyGames Memory Collection</a></li>
+  </ul>
+
+  <!-- Congratulation message -->
+  <div id="congratsMessage">🎉 Congratulations! You matched all pairs! 🎉</div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>📧 Email me at: <a href="mailto:sarahkhadejah@gmail.com" style="color: #FFFDD0;">sarahkhadejah@gmail.com</a></p>
+  <p style="font-size: 10px; margin-top: 5px; color: #ddd;">
+    Created: 1 June 2025 | Last updated: <span id="lastUpdated"></span>
+  </p>
+</footer>
+
+<script>
+  function updateClock() {
+    var now = new Date();
+    var time = now.toLocaleTimeString();
+    var day = now.getDate();
+    var month = now.getMonth() + 1;
+    var year = now.getFullYear();
+    var date = day + '/' + month + '/' + year;
+
+    document.getElementById("clock").innerHTML = date + " | " + time;
+  }
+
+  setInterval(updateClock, 1000);
+  updateClock();
+</script>
+
+<script>
+function searchSite() {
+    const input = document.getElementById("searchInput").value.toLowerCase().trim();
+    const pages = {
+      "about me": "home.html",
+      "family": "family.html",
+      "education": "education.html",
+      "experience": "experience.html",
+      "gallery": "gallery.html",
+      "games": "games.html",
+      "music": "music.html"
+    };
+
+    let found = false;
+    for (const key in pages) {
+      if (input.includes(key)) {
+        location.href = pages[key];
+        found = true;
+        break;
+      }
+    }
+
+    if (!found) alert("No match found.");
+  }
+
+  document.getElementById("searchInput").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      searchSite();
+    }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+  var emojis = ["🦋", "🐶", "🐸", "🐵", "🐙", "🐨"];
+  var cardsArray = emojis.concat(emojis); 
+  var gameBoard = document.getElementById("gameBoard");
+  var congratsMessage = document.getElementById("congratsMessage");
+
+  var flippedCards = [];
+  var lockBoard = false;
+  var matchedPairs = 0;
+  var totalPairs = emojis.length;
+
+  function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+    while (0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+    return array;
+  }
+
+  cardsArray = shuffle(cardsArray);
+
+  for (var i = 0; i < cardsArray.length; i++) {
+    var card = document.createElement("div");
+    card.className = "card";
+    card.dataset.emoji = cardsArray[i];
+    card.innerHTML = ""; 
+
+    card.onclick = function() {
+      if (lockBoard) return; 
+      if (this.classList.contains("flipped") || this.classList.contains("matched")) return;
+
+      this.classList.add("flipped");
+      this.innerHTML = this.dataset.emoji;
+      flippedCards.push(this);
+
+      if (flippedCards.length === 2) {
+        lockBoard = true;
+        setTimeout(checkForMatch, 1000);
+      }
+    };
+
+    gameBoard.appendChild(card);
+  }
+
+  function checkForMatch() {
+    var card1 = flippedCards[0];
+    var card2 = flippedCards[1];
+
+    if (card1.dataset.emoji === card2.dataset.emoji) {
+      card1.classList.add("matched");
+      card2.classList.add("matched");
+      matchedPairs++;
+
+      if (matchedPairs === totalPairs) {
+        showCongrats();
+      }
+    } else {
+      card1.classList.remove("flipped");
+      card2.classList.remove("flipped");
+      card1.innerHTML = "";
+      card2.innerHTML = "";
+    }
+
+    flippedCards = [];
+    lockBoard = false;
+  }
+
+  function showCongrats() {
+    congratsMessage.style.display = "block";
+    launchConfetti();
+  }
+
+  function launchConfetti() {
+    var duration = 5 * 1000; 
+    var animationEnd = Date.now() + duration;
+    var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 1000 };
+
+    var interval = setInterval(function() {
+    var timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        clearInterval(interval);
+        return;
+  }
+      var particleCount = 50 * (timeLeft / duration);
+
+      confetti(Object.assign({}, defaults, {
+        particleCount: particleCount,
+        origin: { x: Math.random() * 0.3, y: Math.random() - 0.2 }
+      }));
+
+      confetti(Object.assign({}, defaults, {
+        particleCount: particleCount,
+        origin: { x: 0.7 + Math.random() * 0.3, y: Math.random() - 0.2 }
+      }));
+
+    }, 250);
+  }
+</script>
+
+<script>
+  function changeFontSize(change) {
+  const body = document.body;
+  const style = window.getComputedStyle(body);
+  let currentSize = parseFloat(style.fontSize);
+
+  if (change === 0) {
+    currentSize = 16; 
+  } else {
+    currentSize += change;
+    if (currentSize < 12) currentSize = 12;
+    if (currentSize > 24) currentSize = 24;
+  }
+  body.style.fontSize = currentSize + 'px';
+}
+</script>
+
+<script>
+  document.getElementById('lastUpdated').textContent = '10 June 2025';
+</script>
+
+</body>
+</html>

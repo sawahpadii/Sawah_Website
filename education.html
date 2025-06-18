@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sawah's Diaries</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('bgg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #5B0000;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      position: relative;
+      background-color: #5B0000;
+      color: #FFFDD0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    #clock {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 14px;
+      color: #FFFDD0;
+    }
+
+    nav {
+      background-color: #FFFDD0;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #5B0000;
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 5px;
+      display: inline-block;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+      transition: box-shadow 0.3s ease, color 0.3s ease;
+    }
+
+    nav a:hover {
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+      background-color: #FFFDD0;
+      color: black;
+    }
+
+    section {
+      flex: 1;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 800px;
+      border-radius: 5px;
+      background-color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+    }
+
+    header h1 {
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+      transition: text-shadow 0.3s ease;
+    }
+
+    header h1:hover {
+      text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    footer {
+      text-align: center;
+      padding: 3px;
+      background-color: #5B0000;
+      color: white;
+      font-size: 12px;
+      margin-top: 40px;
+    }
+
+    .slideshow-container {
+      max-width: 100%;
+      position: relative;
+      margin: auto;
+    }
+
+    .mySlides {
+      display: none;
+    }
+
+    .mySlides img {
+      width: 50%;
+      border-radius: 10px;
+    }
+
+    .text {
+      color: #5B0000;
+      font-size: 18px;
+      padding: 8px 12px;
+      position: absolute;
+      bottom: 8px;
+      width: 100%;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.6);
+      font-weight: bold;
+    }
+
+    .fade {
+      animation-name: fade;
+      animation-duration: 1.5s;
+    }
+
+    @keyframes fade {
+      from { opacity: .4 } 
+      to { opacity: 1 }
+    }
+
+    .dot {
+      height: 10px;
+      width: 10px;
+      margin: 0 4px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+    }
+
+    .active {
+      background-color: #5B0000;
+    }
+
+    .font-resize-buttons {
+      position: absolute;
+      right: 20px;
+      bottom: 10px;
+    }
+
+    .font-resize-buttons button {
+      background-color: maroon;
+      color: #FFFDD0;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .font-resize-buttons button:hover {
+      background-color: #7c1c1c;
+    }
+  </style>
+</head>
+<body>
+
+<header> 
+  <div id="clock"></div>
+  <h1>⋆˚࿔ ꜱᴀᴡᴀʜ'ꜱ ᴡᴇʙꜱɪᴛᴇ 𝜗𝜚˚⋆</h1>
+
+  <!-- Search Bar -->
+  <div style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+    <input 
+      type="text" 
+      id="searchInput" 
+      placeholder="Search..." 
+      style="padding: 6px 12px; border: 1px solid #FFFDD0; border-radius: 20px; background-color: transparent; color: white; font-size: 14px; width: 160px;">
+    <button 
+      onclick="searchSite()" 
+      style="margin-left: 8px; padding: 6px 14px; background-color: #FFFDD0; border: 1px solid maroon; color: maroon; border-radius: 20px; font-size: 14px;">
+      Search
+    </button>
+  </div>
+
+  <!-- Font Size Buttons -->
+  <div class="font-resize-buttons">
+    <button onclick="changeFontSize(1)">A+</button>
+    <button onclick="changeFontSize(0)">A</button>
+    <button onclick="changeFontSize(-1)">A-</button>
+  </div>
+</header>
+
+<nav>
+  <a href="index.html">HOME</a>
+  <a href="home.html">ABOUT ME</a>
+  <a href="family.html">FAMILY</a>
+  <a href="education.html">EDUCATION</a>
+  <a href="experience.html">EXPERIENCE</a>
+  <a href="gallery.html">GALLERY</a> 
+  <a href="music.html">MUSIC</a>
+  <a href="games.html">GAMES</a>
+</nav>
+
+<section>
+  <h1>MY EDUCATION BACKGROUND</h1>
+  <p>Welcome to my education timeline! Here, you can follow my learning journey, from my kindergarten days to my current diploma studies at UiTM Machang. Each slide shows where the places are.</p>
+
+  <div class="slideshow-container">
+
+    <div class="mySlides fade">
+      <img src="smart.jpg" alt="Smart Reader Kindergarten">
+      <div class="text">
+        <strong>Kindergarten:</strong> Smart Reader<br>
+        <strong>Duration:</strong> 2007–2009
+      </div>
+    </div>
+
+    <div class="mySlides fade">
+      <img src="sksi4.jpg" alt="SK Ismail 4 Primary School">
+      <div class="text">
+        <strong>Elementary School:</strong> Sekolah Kebangsaan Ismail 4<br>
+        <strong>Duration:</strong> 2010–2016
+      </div>
+    </div>
+
+    <div class="mySlides fade">
+      <img src="smk.jpg" alt="SMK Kubang Kerian 3">
+      <div class="text">
+        <strong>Secondary School:</strong> SMK Kubang Kerian 3<br>
+        <strong>Duration:</strong> 2017–2022
+      </div>
+    </div>
+
+    <div class="mySlides fade">
+      <img src="uitm.jpg" alt="UiTM Machang Campus">
+      <div class="text">
+        <strong>Diploma:</strong> UiTM Machang<br>
+        <strong>Duration:</strong> 2023–2025
+      </div>
+    </div>
+
+  </div>
+
+  <br>
+
+  <div style="text-align:center">
+    <span class="dot"></span> 
+    <span class="dot"></span> 
+    <span class="dot"></span> 
+    <span class="dot"></span> 
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>📧 Email me at: <a href="mailto:sarahkhadejah@gmail.com" style="color: #FFFDD0;">sarahkhadejah@gmail.com</a></p>
+  <p style="font-size: 10px; margin-top: 5px; color: #ddd;">
+    Created: 1 June 2025 | Last updated: <span id="lastUpdated"></span>
+  </p>
+</footer>
+
+<script>
+  function updateClock() {
+    const now = new Date();
+    const time = now.toLocaleTimeString();
+    const date = now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear();
+    document.getElementById("clock").innerHTML = date + " | " + time;
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
+</script>
+
+<script>
+  function searchSite() {
+    const input = document.getElementById("searchInput").value.toLowerCase().trim();
+    const pages = {
+      "about me": "home.html",
+      "family": "family.html",
+      "education": "education.html",
+      "experience": "experience.html",
+      "gallery": "gallery.html",
+      "games": "games.html",
+      "music": "music.html"
+    };
+
+    let found = false;
+    for (const key in pages) {
+      if (input.includes(key)) {
+        location.href = pages[key];
+        found = true;
+        break;
+      }
+    }
+
+    if (!found) alert("No match found.");
+  }
+
+  document.getElementById("searchInput").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      searchSite();
+    }
+  });
+</script>
+
+<script>
+  let slideIndex = 0;
+  showSlides();
+
+  function showSlides() {
+    const slides = document.getElementsByClassName("mySlides");
+    const dots = document.getElementsByClassName("dot");
+
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+
+    slideIndex++;
+    if (slideIndex > slides.length) slideIndex = 1;
+
+    for (let i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+    }
+
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].className += " active";
+
+    setTimeout(showSlides, 3000); 
+  }
+</script>
+
+<script>
+  function changeFontSize(change) {
+    const body = document.body;
+    let currentSize = parseFloat(window.getComputedStyle(body).fontSize);
+
+    if (change === 0) currentSize = 16;
+    else currentSize = Math.max(12, Math.min(24, currentSize + change));
+
+    body.style.fontSize = currentSize + 'px';
+  }
+</script>
+
+<script>
+  document.getElementById('lastUpdated').textContent = '10 June 2025';
+</script>
+
+</body>
+</html>
